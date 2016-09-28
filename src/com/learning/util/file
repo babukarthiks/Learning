@@ -1,0 +1,1023 @@
+View Javadoc
+
+1   package com.cerner.msvc.notification.message.server.maintain;
+2   
+3   /**
+4    * <p><i>S_AddNotification</i> is an Enterprise Data Index.</p>
+5    *
+6    * 
+7    * <p>Indexes for the <tt><b>AddNotificationReply</b></tt> of STRUCT type.
+8    * <pre>
+9    * status_data                          STRUCT
+10   *   status                               STRING [1]
+11   *   subeventstatus                       LIST
+12   *     OperationName                        STRING [25]
+13   *     OperationStatus                      STRING [1]
+14   *     TargetObjectName                     STRING [25]
+15   *     TargetObjectValue                    STRING
+16   * invalid_receivers                    LIST
+17   *   entity_id                            DOUBLE
+18   *   entity_type                          STRING
+19   * notifications                        LIST
+20   *   task_id                              DOUBLE
+21   *   event_id                             DOUBLE
+22   * </pre>
+23   * </p>
+24   *
+25   * <p>Indexes for the <tt><b>AddNotificationRequest</b></tt> of STRUCT type.
+26   * <pre>
+27   * message_list                         LIST
+28   *   draft_msg_uid                        STRING
+29   *   person_id                            DOUBLE
+30   *   encntr_id                            DOUBLE
+31   *   event_cd                             DOUBLE
+32   *   task_type_cd                         DOUBLE
+33   *   priority_cd                          DOUBLE
+34   *   save_to_chart_ind                    SHORT
+35   *   msg_sender_pool_id                   DOUBLE
+36   *   msg_sender_person_id                 DOUBLE
+37   *   msg_sender_prsnl_id                  DOUBLE
+38   *   msg_subject                          STRING
+39   *   refill_request_ind                   SHORT
+40   *   msg_text                             ASIS
+41   *   reminder_dt_tm                       DATE
+42   *   due_dt_tm                            DATE
+43   *   callerName                           STRING
+44   *   callerPhone                          STRING
+45   *   notify_info                          STRUCT
+46   *     notify_pool_id                       DOUBLE
+47   *     notify_prsnl_id                      DOUBLE
+48   *     notify_priority_cd                   DOUBLE
+49   *     notify_status_list                   LIST
+50   *       notify_status_cd                     DOUBLE
+51   *       delay                                STRUCT
+52   *         value                                LONG
+53   *         unit_flag                            SHORT
+54   *   action_request_list                  LIST
+55   *     action_request_cd                    DOUBLE
+56   *   assign_prsnl_list                    LIST
+57   *     assign_prsnl_id                      DOUBLE
+58   *     cc_ind                               SHORT
+59   *     selection_nbr                        LONG
+60   *   assign_person_list                   LIST
+61   *     assign_person_id                     DOUBLE
+62   *     cc_ind                               SHORT
+63   *     selection_nbr                        LONG
+64   *     reply_allowed_ind                    SHORT
+65   *   assign_pool_list                     LIST
+66   *     assign_pool_id                       DOUBLE
+67   *     assign_prsnl_id                      DOUBLE
+68   *     cc_ind                               SHORT
+69   *     selection_nbr                        LONG
+70   *   encounter_class_cd                   DOUBLE
+71   *   encounter_type_cd                    DOUBLE
+72   *   org_id                               DOUBLE
+73   *   get_best_encounter                   SHORT
+74   *   create_encounter                     SHORT
+75   *   proposed_order_list                  LIST
+76   *     proposed_order_id                    DOUBLE
+77   *   event_id                             DOUBLE
+78   *   order_id                             DOUBLE
+79   *   encntr_prsnl_reltn_cd                DOUBLE
+80   *   facility_cd                          DOUBLE
+81   *   send_to_chart_ind                    SHORT
+82   *   original_task_uid                    STRING
+83   *   rx_renewal_list                      LIST
+84   *     rx_renewal_uid                       STRING
+85   *   task_status_flag                     SHORT
+86   *   task_activity_flag                   SHORT
+87   *   event_class_flag                     SHORT
+88   *   attachments                          LIST
+89   *     name                                 STRING [255]
+90   *     location_handle                      STRING [255]
+91   *     media_identifier                     STRING [255]
+92   *     media_version                        LONG
+93   *   sender_email                         STRING [320]
+94   *   assign_emails                        LIST
+95   *     email                                STRING [320]
+96   *     cc_ind                               SHORT
+97   *     selection_nbr                        LONG
+98   *     first_name                           STRING [100]
+99   *     last_name                            STRING [100]
+100  *     display_name                         STRING [100]
+101  *   sender_email_display_name            STRING [100]
+102  *   result_set_id                        DOUBLE
+103  *   portal_users                         LIST
+104  *     portal_user_uuid                     STRING [128]
+105  *   responsible_prsnl_id                 DOUBLE
+106  *   rx_change_ids                        LIST
+107  *     rx_change_id                         DOUBLE
+108  *   text_format_cd                       DOUBLE
+109  *   task_subtype_cd                      DOUBLE
+110  * action_dt_tm                         DATE
+111  * action_tz                            LONG
+112  * skip_validation_ind                  SHORT
+113  * </pre>
+114  * </p>
+115  *
+116  * @author com.cerner.system.enterprise.tools.data.DataIndexGenerator (Revision: 53533)
+117  */
+118 public interface S_AddNotification
+119 {
+120 
+121     /**
+122      * 
+123      * <p><i>AddNotificationReply</i></p>
+124      *
+125      * <pre>
+126      * struct AddNotificationReply
+127      * {
+128      *     StatusData status_data;
+129      *     InvalidReceiverList invalid_receivers;
+130      *     list (967503_Notification) notifications;
+131      * }
+132      * </pre>
+133      */
+134     interface AddNotificationReply
+135     {
+136         /**
+137          * Transaction status information.
+138          */
+139         int STATUS_DATA = 0;
+140 
+141         /**
+142          * 
+143          * <p><i>STATUS_DATA_</i></p>
+144          *
+145          * <pre>
+146          * struct StatusData
+147          * {
+148          *     string (1) status;
+149          *     SubEventStatus subeventstatus;
+150          * }
+151          * </pre>
+152          */
+153         interface STATUS_DATA_
+154         {
+155             /**
+156              * Indicates status of transaction.  "S" = Success, "F" = Failure, "Z" = No Data.
+157              */
+158             int STATUS = 0;
+159             /**
+160              * Only populated with status of "F".
+161              */
+162             int SUBEVENTSTATUS = 1;
+163 
+164             /**
+165              * 
+166              * Status Block structure - used for old status block.
+167              * 
+168              * 
+169              * <p><i>SUBEVENTSTATUS_</i></p>
+170              *
+171              * <pre>
+172              * struct SubEventStatusItem
+173              * {
+174              *     string (25) OperationName;
+175              *     string (1) OperationStatus;
+176              *     string (25) TargetObjectName;
+177              *     string TargetObjectValue;
+178              * }
+179              * </pre>
+180              */
+181             interface SUBEVENTSTATUS_
+182             {
+183                 /**
+184                  * The name of the transaction which a failure("F") occured.
+185                  */
+186                 int OPERATIONNAME = 0;
+187                 /**
+188                  * The status of the failure = "F".
+189                  */
+190                 int OPERATIONSTATUS = 1;
+191                 /**
+192                  * Type of failure that occured. ex: NullPointerException
+193                  */
+194                 int TARGETOBJECTNAME = 2;
+195                 /**
+196                  * Short description of failure.
+197                  */
+198                 int TARGETOBJECTVALUE = 3;
+199             }
+200         }
+201 
+202         /**
+203          * Invalid receivers in the transaction (will be empty). <br>
+204          * @deprecated As of 1.0, The transaction will fail if any receiver is invalid.
+205          */
+206         int INVALID_RECEIVERS = 1;
+207 
+208         /**
+209          * ***  REPLY - UpdateNotification (967501) ****
+210          * 
+211          * <p><i>INVALID_RECEIVERS_</i></p>
+212          *
+213          * <pre>
+214          * struct InvalidReceiverListItem
+215          * {
+216          *     double entity_id;
+217          *     string entity_type;
+218          * }
+219          * </pre>
+220          */
+221         interface INVALID_RECEIVERS_
+222         {
+223             /**
+224              * Identifier of the invalid entity (will be non-zero).
+225              * Deprecated: As of 1.0, The transaction will fail if any receiver is invalid.
+226              */
+227             int ENTITY_ID = 0;
+228             /**
+229              * Type of invalid entity (will be PERSONNEL_ENTITY, POOL_ENTITY or PERSON_ENTITY).
+230              * Deprecated: As of 1.0, The transaction will fail if any receiver is invalid.
+231              */
+232             int ENTITY_TYPE = 1;
+233         }
+234 
+235         /**
+236          * The created task and event id. Is only populated for RXCHANGE message types.
+237          * @since 8.1
+238          */
+239         int NOTIFICATIONS = 2;
+240 
+241         /**
+242          * ***  REPLY - AddNotification (967503)  ****
+243          * 
+244          * <p><i>NOTIFICATIONS_</i></p>
+245          *
+246          * <pre>
+247          * struct 967503_Notification
+248          * {
+249          *     double task_id;
+250          *     double event_id;
+251          * }
+252          * </pre>
+253          */
+254         interface NOTIFICATIONS_
+255         {
+256             /**
+257              * Identifier of the task created.
+258              * @since 8.1
+259              */
+260             int TASK_ID = 0;
+261             /**
+262              * Identifier of the event created. Would be populated for save to chart.
+263              * @since 8.1
+264              */
+265             int EVENT_ID = 1;
+266         }
+267     }
+268 
+269     /**
+270      * 
+271      * <p><i>AddNotificationRequest</i></p>
+272      *
+273      * <pre>
+274      * struct AddNotificationRequest
+275      * {
+276      *     MessageList message_list;
+277      *     date action_dt_tm;
+278      *     long action_tz;
+279      *     short skip_validation_ind;
+280      * }
+281      * </pre>
+282      */
+283     interface AddNotificationRequest
+284     {
+285         /**
+286          * Notification information to be added (cannot be empty).
+287          */
+288         int MESSAGE_LIST = 0;
+289 
+290         /**
+291          * 
+292          * <p><i>MESSAGE_LIST_</i></p>
+293          *
+294          * <pre>
+295          * struct MessageListItem
+296          * {
+297          *     string draft_msg_uid;
+298          *     double person_id;
+299          *     double encntr_id;
+300          *     double event_cd;
+301          *     double task_type_cd;
+302          *     double priority_cd;
+303          *     short save_to_chart_ind;
+304          *     double msg_sender_pool_id;
+305          *     double msg_sender_person_id;
+306          *     double msg_sender_prsnl_id;
+307          *     string msg_subject;
+308          *     short refill_request_ind;
+309          *     asis msg_text;
+310          *     date reminder_dt_tm;
+311          *     date due_dt_tm;
+312          *     string callerName;
+313          *     string callerPhone;
+314          *     NotifyInfo notify_info;
+315          *     ActionRequestList action_request_list;
+316          *     AssignPrsnlList assign_prsnl_list;
+317          *     AssignPersonList assign_person_list;
+318          *     AssignPoolList assign_pool_list;
+319          *     double encounter_class_cd;
+320          *     double encounter_type_cd;
+321          *     double org_id;
+322          *     short get_best_encounter;
+323          *     short create_encounter;
+324          *     ProposedOrderList proposed_order_list;
+325          *     double event_id;
+326          *     double order_id;
+327          *     double encntr_prsnl_reltn_cd;
+328          *     double facility_cd;
+329          *     short send_to_chart_ind;
+330          *     string original_task_uid;
+331          *     RxRenewalIdsList rx_renewal_list;
+332          *     short task_status_flag;
+333          *     short task_activity_flag;
+334          *     short event_class_flag;
+335          *     AttachmentList attachments;
+336          *     string (320) sender_email;
+337          *     list (AssignEmail) assign_emails;
+338          *     string (100) sender_email_display_name;
+339          *     double result_set_id;
+340          *     list (967503_PortalUser) portal_users;
+341          *     double responsible_prsnl_id;
+342          *     list (967503_rxChangeId) rx_change_ids;
+343          *     double text_format_cd;
+344          *     double task_subtype_cd;
+345          * }
+346          * </pre>
+347          */
+348         interface MESSAGE_LIST_
+349         {
+350             /**
+351              * The fully formed UID of the unsent notification (may be empty).
+352              */
+353             int DRAFT_MSG_UID = 0;
+354             /**
+355              * The patient identifier associated to the notification (may be zero but must be populated if the encntr_id is populated or if attachments exist).<br>
+356              * The patient will be applied to the notification's conversation if the original_task_uid is populated and is tied to a different patient.<br>
+357              * This field is required if the original_task_uid is associated with a patient.
+358              */
+359             int PERSON_ID = 1;
+360             /**
+361              * The encounter identifier associated to the patient (may be zero but if populated must be associated to the person_id).<br>
+362              * The encounter will be applied to the notification's conversation if the original_task_uid is populated and is tied to a different encounter.<br>
+363              */
+364             int ENCNTR_ID = 2;
+365             /**
+366              * Code value that identifies the most basic unit of the storage [code set: 72] (may be zero)
+367              */
+368             int EVENT_CD = 3;
+369             /**
+370              * Code value representing the group the task belongs to [code set: 6026].  Defaults to 'PHONE MSG' (may be zero).
+371              */
+372             int TASK_TYPE_CD = 4;
+373             /**
+374              * Code value representing the priority of the task. ex: STAT [code set: 1304].  Defaults to 'ROUTINE' (may be zero).
+375              */
+376             int PRIORITY_CD = 5;
+377             /**
+378              * Indicator to save notification to patient's chart (1 = Save, 0 = Do not save).
+379              */
+380             int SAVE_TO_CHART_IND = 6;
+381             /**
+382              * Identifier representing pool sender (may be zero).
+383              */
+384             int MSG_SENDER_POOL_ID = 7;
+385             /**
+386              * Identifier representing the patient sender (may be zero). <br>
+387              * @deprecated As of 1.0, This field is <b>Ignored, Deprecated, and Was Never Used</b> but for passivity reasons we cannot remove it from the API entry.
+388              */
+389             int MSG_SENDER_PERSON_ID = 8;
+390             /**
+391              * Identifier representing the personnel sender (cannot be zero).
+392              */
+393             int MSG_SENDER_PRSNL_ID = 9;
+394             /**
+395              * Message to appear as the subject of the notification (cannot be null and must be less than 256 characters).
+396              */
+397             int MSG_SUBJECT = 10;
+398             /**
+399              * Indicator to determine if notification is request for an order refill (1 = Yes, 0 = No).
+400              */
+401             int REFILL_REQUEST_IND = 11;
+402             /**
+403              * Message to appear as the body of the notification (may be empty).
+404              * <br>
+405              * This message should be encoded in the system's default encoding as specified by the system property <em>cerner.native.charset</em>.
+406              */
+407             int MSG_TEXT = 12;
+408             /**
+409              * Remind date/time to be set.  Signifies when a reminder will be available for retrieval (may be null).
+410              */
+411             int REMINDER_DT_TM = 13;
+412             /**
+413              * Date/Time a notification will become overdue (may be null).
+414              */
+415             int DUE_DT_TM = 14;
+416             /**
+417              * Name of the caller of whom the notification derived (may be empty).
+418              */
+419             int CALLERNAME = 15;
+420             /**
+421              * Phone number of the caller of whom the notification derived (may be empty).
+422              */
+423             int CALLERPHONE = 16;
+424             /**
+425              * Structure containing information determining to whom and when a notification receipt is generated.
+426              */
+427             int NOTIFY_INFO = 17;
+428 
+429             /**
+430              * 
+431              * <p><i>NOTIFY_INFO_</i></p>
+432              *
+433              * <pre>
+434              * struct NotifyInfo
+435              * {
+436              *     double notify_pool_id;
+437              *     double notify_prsnl_id;
+438              *     double notify_priority_cd;
+439              *     NotifyStatusList notify_status_list;
+440              * }
+441              * </pre>
+442              */
+443             interface NOTIFY_INFO_
+444             {
+445                 /**
+446                  * Pool identifier to receive the notification when the status code matches a notify status code (may be zero).
+447                  */
+448                 int NOTIFY_POOL_ID = 0;
+449                 /**
+450                  * Personnel identifier to receive the notification when the status code matches a notify status code (may be zero).
+451                  */
+452                 int NOTIFY_PRSNL_ID = 1;
+453                 /**
+454                  * Code value representing the priority the notification should be sent with. Defaults to 'ROUTINE'. [code set: 1304] (may be zero).
+455                  */
+456                 int NOTIFY_PRIORITY_CD = 2;
+457                 /**
+458                  * Status codes to trigger notifications to be sent (may be empty).
+459                  */
+460                 int NOTIFY_STATUS_LIST = 3;
+461 
+462                 /**
+463                  * 
+464                  * <p><i>NOTIFY_STATUS_LIST_</i></p>
+465                  *
+466                  * <pre>
+467                  * struct NotifyStatusItem
+468                  * {
+469                  *     double notify_status_cd;
+470                  *     NotifyDelay delay;
+471                  * }
+472                  * </pre>
+473                  */
+474                 interface NOTIFY_STATUS_LIST_
+475                 {
+476                     /**
+477                      * Code value representing the status of the notification that will trigger notify to be sent (must be positive).
+478                      */
+479                     int NOTIFY_STATUS_CD = 0;
+480                     /**
+481                      * The amount of time after the notification is created to wait before
+482                      * generating a receipt if the notification has not yet attained the specified status.
+483                      * Currently, this only applies to the 'Not Opened In "X" Units' receipt type.
+484                      * @since 2.0
+485                      */
+486                     int DELAY = 1;
+487 
+488                     /**
+489                      * 
+490                      * <p><i>DELAY_</i></p>
+491                      *
+492                      * <pre>
+493                      * struct NotifyDelay
+494                      * {
+495                      *     long value;
+496                      *     short unit_flag;
+497                      * }
+498                      * </pre>
+499                      */
+500                     interface DELAY_
+501                     {
+502                         /**
+503                          * The value of the delay in the defined units (cannot be negative or zero and must be a whole number).
+504                          */
+505                         int VALUE = 0;
+506                         /**
+507                          * The unit of the delay value (cannot be zero and must be a valid unit if delay value is populated).
+508                          * <p />
+509                          * <strong>Only the flag defined below are supported. Any other flag will result in a transaction failure.</strong>
+510                          * <p />
+511                          * Flag values:
+512                          * <ul>
+513                          * <li>0 - Unset</li>
+514                          * <li>1 - Days</li>
+515                          * </ul>
+516                          */
+517                         int UNIT_FLAG = 1;
+518                     }
+519                 }
+520             }
+521 
+522             /**
+523              * Requested actions the sender would like fulfilled by the receiver (may be empty). <br>
+524              */
+525             int ACTION_REQUEST_LIST = 18;
+526 
+527             /**
+528              * 
+529              * <p><i>ACTION_REQUEST_LIST_</i></p>
+530              *
+531              * <pre>
+532              * struct ActionRequestItem
+533              * {
+534              *     double action_request_cd;
+535              * }
+536              * </pre>
+537              */
+538             interface ACTION_REQUEST_LIST_
+539             {
+540                 /**
+541                  * Code value representing an action the sender requested. ex: PHONE MSG : Phone Message Call Me with the Results [code set: 3400] (must be positive).
+542                  */
+543                 int ACTION_REQUEST_CD = 0;
+544             }
+545 
+546             /**
+547              * Personnel receiving the notification (may be empty).  The transaction will fail if any receiver is invalid.
+548              */
+549             int ASSIGN_PRSNL_LIST = 19;
+550 
+551             /**
+552              * 
+553              * <p><i>ASSIGN_PRSNL_LIST_</i></p>
+554              *
+555              * <pre>
+556              * struct AssignPrsnlItem
+557              * {
+558              *     double assign_prsnl_id;
+559              *     short cc_ind;
+560              *     long selection_nbr;
+561              * }
+562              * </pre>
+563              */
+564             interface ASSIGN_PRSNL_LIST_
+565             {
+566                 /**
+567                  * Personnel identifier to receive the notification (must be positive).
+568                  */
+569                 int ASSIGN_PRSNL_ID = 0;
+570                 /**
+571                  * Indicator to determine if receiver will be a carbon copy receiver (1 = Yes, 0 = No).
+572                  */
+573                 int CC_IND = 1;
+574                 /**
+575                  * Number determining the order in which the receiver was selected (cannot be negative).
+576                  */
+577                 int SELECTION_NBR = 2;
+578             }
+579 
+580             /**
+581              * Patients receiving notification (may be empty).  Only one patient is allowed per transaction.  The transaction will fail if any receiver is invalid.
+582              */
+583             int ASSIGN_PERSON_LIST = 20;
+584 
+585             /**
+586              * 
+587              * <p><i>ASSIGN_PERSON_LIST_</i></p>
+588              *
+589              * <pre>
+590              * struct AssignPersonItem
+591              * {
+592              *     double assign_person_id;
+593              *     short cc_ind;
+594              *     long selection_nbr;
+595              *     short reply_allowed_ind;
+596              * }
+597              * </pre>
+598              */
+599             interface ASSIGN_PERSON_LIST_
+600             {
+601                 /**
+602                  * Patient identifier to receive the notification (must be positive).
+603                  */
+604                 int ASSIGN_PERSON_ID = 0;
+605                 /**
+606                  * Indicator to determine if receiver will be a carbon copy receiver (1 = Yes, 0 = No).
+607                  */
+608                 int CC_IND = 1;
+609                 /**
+610                  * Number determining the order in which the receiver was selected (cannot be negative).
+611                  */
+612                 int SELECTION_NBR = 2;
+613                 /**
+614                  * Indicates whether the patient receiver may reply to the phone message. <br>
+615                  * Valid values:
+616                  * <ul>
+617                  * <li> 0-reply allowed by default</li>
+618                  * <li> 1-reply allowed</li>
+619                  * <li> 2-reply not allowed</li>
+620                  * </ul>
+621                  */
+622                 int REPLY_ALLOWED_IND = 3;
+623             }
+624 
+625             /**
+626              * Pools receiving notification (may be empty).  The transaction will fail if any receiver is invalid.
+627              */
+628             int ASSIGN_POOL_LIST = 21;
+629 
+630             /**
+631              * 
+632              * <p><i>ASSIGN_POOL_LIST_</i></p>
+633              *
+634              * <pre>
+635              * struct AssignPoolItem
+636              * {
+637              *     double assign_pool_id;
+638              *     double assign_prsnl_id;
+639              *     short cc_ind;
+640              *     long selection_nbr;
+641              * }
+642              * </pre>
+643              */
+644             interface ASSIGN_POOL_LIST_
+645             {
+646                 /**
+647                  * Pool identifier to receiver the notification (must be positive).
+648                  */
+649                 int ASSIGN_POOL_ID = 0;
+650                 /**
+651                  * Pool member to be assigned to the notification (may be zero).
+652                  */
+653                 int ASSIGN_PRSNL_ID = 1;
+654                 /**
+655                  * Indicator to determine if receiver will be a carbon copy receiver (1 = Yes, 0 = No).
+656                  */
+657                 int CC_IND = 2;
+658                 /**
+659                  * Number determining the order in which the receiver was selected (cannot be negative).
+660                  */
+661                 int SELECTION_NBR = 3;
+662             }
+663 
+664             /**
+665              * Code value used to categorize patient's into Cerner defined general groups. ex: emergency [code set: 69] (may be zero).
+666              */
+667             int ENCOUNTER_CLASS_CD = 22;
+668             /**
+669              * Code value used to categorize the encounter into logical groups. ex: inpatient [code set: 71] (may be empty).
+670              */
+671             int ENCOUNTER_TYPE_CD = 23;
+672             /**
+673              * Identifier representing the client organization (may be zero).
+674              */
+675             int ORG_ID = 24;
+676             /**
+677              * Indicator to find a best encounter for the notification if no encounter identifier was given (1 = Yes, 0 = No).
+678              */
+679             int GET_BEST_ENCOUNTER = 25;
+680             /**
+681              * Indicator to create an encounter for the notification if no encounter identifier was given/found.  Client organization is required (1 = Yes, 0 = No).
+682              */
+683             int CREATE_ENCOUNTER = 26;
+684             /**
+685              * Proposed orders associated to the patient of the notification (may be empty).
+686              */
+687             int PROPOSED_ORDER_LIST = 27;
+688 
+689             /**
+690              * 
+691              * <p><i>PROPOSED_ORDER_LIST_</i></p>
+692              *
+693              * <pre>
+694              * struct ProposedOrderItem
+695              * {
+696              *     double proposed_order_id;
+697              * }
+698              * </pre>
+699              */
+700             interface PROPOSED_ORDER_LIST_
+701             {
+702                 /**
+703                  * Identifier for the proposed order.
+704                  */
+705                 int PROPOSED_ORDER_ID = 0;
+706             }
+707 
+708             /**
+709              * Identifier representing a valid clinical event (may be zero).
+710              */
+711             int EVENT_ID = 28;
+712             /**
+713              * Identifier representing an order associated to the patient (may be zero).
+714              */
+715             int ORDER_ID = 29;
+716             /**
+717              * Code value representing a relationship between the encounter and the personnel. ex: Attending Physician [code set: 333] (may be zero).
+718              */
+719             int ENCNTR_PRSNL_RELTN_CD = 30;
+720             /**
+721              * Code value representing the facility associated to the patient [code set: 220] (may be zero).
+722              */
+723             int FACILITY_CD = 31;
+724             /**
+725              * Indicator to only send notification to the patient's chart. (1 = Send to chart, receiver list must be empty, 0 = Do not send, at least one receiver list must be populated).
+726              */
+727             int SEND_TO_CHART_IND = 32;
+728             /**
+729              * The fully formatted UID of the notification being replied to (may be empty).
+730              */
+731             int ORIGINAL_TASK_UID = 33;
+732             /**
+733              * Rx renewals associated to the notification. This field is used when forwarding
+734              * notification to providers for them to be able to address the rx renewals (may be empty).
+735              */
+736             int RX_RENEWAL_LIST = 34;
+737 
+738             /**
+739              * 
+740              * <p><i>RX_RENEWAL_LIST_</i></p>
+741              *
+742              * <pre>
+743              * struct RxRenewalIds
+744              * {
+745              *     string rx_renewal_uid;
+746              * }
+747              * </pre>
+748              */
+749             interface RX_RENEWAL_LIST_
+750             {
+751                 /**
+752                  * The primary uid for the rx renewal.
+753                  */
+754                 int RX_RENEWAL_UID = 0;
+755             }
+756 
+757             /**
+758              * Flag value representing the task status.  Defaults to 'PENDING' (may be zero) for Letters to Print.  Field not applicable for non-letter to print types.
+759              * <p />
+760              * <strong>Only the flag defined below are supported. Any other flag will result in a transaction failure.</strong>
+761              * <strong>The transaction shall fail if populateed for secure message types.</strong>
+762              * <p />
+763              * Flag values:
+764              * <ul>
+765              * <li>0 - Default</li>
+766              * <li>1 - PENDING</li>
+767              * <li>2 - OPENED</li>
+768              * <li>3 - ONHOLD</li>
+769              * <li>4 - COMPLETE</li>
+770              * </ul>
+771              */
+772             int TASK_STATUS_FLAG = 35;
+773             /**
+774              * Flag value representing the task activity.  Defaults to 'COMPLETE_PERSONAL' (may be zero) for Letters To Print.  Field not applicable for non-letter to print types.
+775              * <p />
+776              * <strong>Only the flag defined below are supported. Any other flag will result in a transaction failure.</strong>
+777              * <strong>The transaction shall fail if populateed for secure message types.</strong>
+778              * <p />
+779              * Flag values:
+780              * <ul>
+781              * <li>0 - Default</li>
+782              * <li>1 - COMPLETE_PERSONAL</li>
+783              * <li>2 - PRINT_RESULT</li>
+784              * </ul>
+785              */
+786             int TASK_ACTIVITY_FLAG = 36;
+787             /**
+788              * Flag value representing the event class associated to the endorsement. Endorsement notifications should have a value
+789              * between 1 and 3 (inclusive), any other value will result in a transaction failure.  Non-endorsement notifications should
+790              * have a value of 0, any other value will result in a transaction failure.  Field not applicable for non-letter to print types.
+791              * <p />
+792              * <strong>Only the flags defined below are supported.  Any other flag value will result in a transaction failure.</strong>
+793              * <p />
+794              * Flag values:
+795              * <ul>
+796              * <li>0 - NONE</li>
+797              * <li>1 - DOC</li>
+798              * <li>2 - MDOC</li>
+799              * <li>3 - GRPDOC</li>
+800              * </ul>
+801              */
+802             int EVENT_CLASS_FLAG = 37;
+803             /**
+804              * The list of attached media information for office messages, consults, rxRenewals, and rxRenewalSuspectMatch (may be empty).
+805              * <strong>If attachments are populated, the person_id must also be populated.</strong>
+806              */
+807             int ATTACHMENTS = 38;
+808 
+809             /**
+810              * *** REQUEST - AddNotification (967503) ****
+811              * 
+812              * <p><i>ATTACHMENTS_</i></p>
+813              *
+814              * <pre>
+815              * struct Attachment
+816              * {
+817              *     string (255) name;
+818              *     string (255) location_handle;
+819              *     string (255) media_identifier;
+820              *     long media_version;
+821              * }
+822              * </pre>
+823              */
+824             interface ATTACHMENTS_
+825             {
+826                 /**
+827                  * The name of the attached media at the time the notification
+828                  * was created (<b>Required</b> field and must be 255 characters or less).
+829                  */
+830                 int NAME = 0;
+831                 /**
+832                  * The handle to the location of external content (<b>Required</b>
+833                  * field if save_to_chart_ind is 1 (Save) and must be 255
+834                  * characters or less). <br>
+835                  * Transaction error if the location_handle is populated and
+836                  * save_to_chart_ind is 0 (Not Saved).<br>
+837                  * Transaction error if the location_handle is NOT populated and
+838                  * save_to_chart_ind is 1 (Saved).
+839                  */
+840                 int LOCATION_HANDLE = 1;
+841                 /**
+842                  * The identifier of the attached media (<b>Required</b> field and
+843                  * must be 255 characters or less).
+844                  */
+845                 int MEDIA_IDENTIFIER = 2;
+846                 /**
+847                  * The version of the attached media at the time the notification
+848                  * was created (<b>Required</b> field and cannot be negative).
+849                  */
+850                 int MEDIA_VERSION = 3;
+851             }
+852 
+853             /**
+854              * Sender's email that must be valid according to RFC5322 [section-3.4.1] and RFC5321 in the form of local@domain.  <br>
+855              * <ul><li>local must be 64 chars or less [RFC5321 section-4.5.3.1.1] </li>
+856              * <li>domain must be 255 chars or less [RFC5321 section-4.5.3.1.2] </li></ul>
+857              * The transaction will fail if the sender email is not provided when the assign_emails list is populated. <br>
+858              * The transaction will fail if the sender email is provided when the assign_emails list is not populated.
+859              */
+860             int SENDER_EMAIL = 39;
+861             /**
+862              * List of emails receiving notification (may be empty). <br>
+863              * This list is optional, but may only be populated for PHONE_MSG task type. <br>
+864              * The transaction will fail if assign_emails given for any other task types.  <br>
+865              * The transaction will fail if any email is not valid.	 <br>
+866              * The transaction will fail if no assign_emails are provided when the sender email is populated. <br>
+867              * The transaction will fail if assign_emails are provided when the sender email is not populated. <br>
+868              * The transaction will fail if duplicate emails are given.
+869              */
+870             int ASSIGN_EMAILS = 40;
+871 
+872             /**
+873              * 
+874              * <p><i>ASSIGN_EMAILS_</i></p>
+875              *
+876              * <pre>
+877              * struct AssignEmail
+878              * {
+879              *     string (320) email;
+880              *     short cc_ind;
+881              *     long selection_nbr;
+882              *     string (100) first_name;
+883              *     string (100) last_name;
+884              *     string (100) display_name;
+885              * }
+886              * </pre>
+887              */
+888             interface ASSIGN_EMAILS_
+889             {
+890                 /**
+891                  * Email that must be valid according to RFC5322 [section-3.4.1] and RFC5321 in the form of local@domain.  <br>
+892                  * local must be 64 chars or less [RFC5321 section-4.5.3.1.1] <br>
+893                  * domain must be 255 chars or less [RFC5321 section-4.5.3.1.2]
+894                  */
+895                 int EMAIL = 0;
+896                 /**
+897                  * Indicator to determine if the recipient is carbon copied (1 = Yes, 0 = No).
+898                  */
+899                 int CC_IND = 1;
+900                 /**
+901                  * Number determining the order in which the receiver was selected (cannot be negative).
+902                  */
+903                 int SELECTION_NBR = 2;
+904                 /**
+905                  * The email recipient's first name (May be empty. Must be empty if display_name is populated.)
+906                  */
+907                 int FIRST_NAME = 3;
+908                 /**
+909                  * The email recipient's last name (May be empty. Must be empty if display_name is populated.)
+910                  */
+911                 int LAST_NAME = 4;
+912                 /**
+913                  * The email recipient's display name (May be empty. Must be empty if first_name or last_name are populated.)
+914                  */
+915                 int DISPLAY_NAME = 5;
+916             }
+917 
+918             /**
+919              * The sender's display name, viewable by email recipients.
+920              * This should only be populated when the sender_email is also populated. (Optional).
+921              */
+922             int SENDER_EMAIL_DISPLAY_NAME = 41;
+923             /**
+924              * Identifier representing a valid result set id. Only supported for phone message type (may be zero).
+925              * @since 11.1
+926              */
+927             int RESULT_SET_ID = 42;
+928             /**
+929              * List of patient portal users that can access the notification.
+930              * An empty list indicates that all portal account users have access.
+931              * @since 13.1
+932              */
+933             int PORTAL_USERS = 43;
+934 
+935             /**
+936              * 
+937              * <p><i>PORTAL_USERS_</i></p>
+938              *
+939              * <pre>
+940              * struct 967503_PortalUser
+941              * {
+942              *     string (128) portal_user_uuid;
+943              * }
+944              * </pre>
+945              */
+946             interface PORTAL_USERS_
+947             {
+948                 /**
+949                  * Identifier of a patient portal user that is allowed access to the notification about the patient. <br>
+950                  * This user may be the patient or a proxy account user such as a parent, guardian or spouse.
+951                  */
+952                 int PORTAL_USER_UUID = 0;
+953             }
+954 
+955             /**
+956              * the provider responsible for the communication, for Meaningful Use reporting purposes.
+957              * @since 8.0
+958              */
+959             int RESPONSIBLE_PRSNL_ID = 44;
+960             /**
+961              * Rx changes associated to the notification. This field is used when forwarding notification to providers for them to be able to address the rx changes. Must be populated for RxChange message type.
+962              * The transaction will fail if the list contains more than one rx change id.
+963              * @since 8.1
+964              */
+965             int RX_CHANGE_IDS = 45;
+966 
+967             /**
+968              * 
+969              * <p><i>RX_CHANGE_IDS_</i></p>
+970              *
+971              * <pre>
+972              * struct 967503_rxChangeId
+973              * {
+974              *     double rx_change_id;
+975              * }
+976              * </pre>
+977              */
+978             interface RX_CHANGE_IDS_
+979             {
+980                 /**
+981                  * An RxChange identifier. Corresponds to the primary key for the IB_RX_REQ table.
+982                  */
+983                 int RX_CHANGE_ID = 0;
+984             }
+985 
+986             /**
+987              * Code value used to categorize the type of text ex: xhtml [code set: 23].
+988              * Only applies to RxChange message types.
+989              * @since 8.1
+990              */
+991             int TEXT_FORMAT_CD = 46;
+992             /**
+993              * Code value used to categorize the task subtype. [code set: 6034].
+994              * Only applies to RxChange message types.
+995              * @since 8.1
+996              */
+997             int TASK_SUBTYPE_CD = 47;
+998         }
+999 
+1000         /**
+1001          * The date and time the action is performed. Required when sending and saving to chart (may be null).
+1002          */
+1003         int ACTION_DT_TM = 1;
+1004         /**
+1005          * The time zone where the action is performed. Required when sending and saving to chart (may be zero).
+1006          */
+1007         int ACTION_TZ = 2;
+1008         /**
+1009          * Indicator to determine if receiver validation should be performed.
+1010          * <ul>
+1011          * <li>0 - perform validation (default) </li>
+1012          * <li>1 - skip performing validation </li>
+1013          * </ul>
+1014          * Skip validation is allowed for the following task types: PHONE MSG, CONSULT, RXRENEWAL, RXNONMATCH, RXSUSMATCH and RXMESSAGE. <br>
+1015          * Skip validation is not applicable for any other task type and should not be set.
+1016          * The transaction will fail if an invalid indicator is given.
+1017          */
+1018         int SKIP_VALIDATION_IND = 3;
+1019     }
+1020 }
+This page was automatically generated by Maven
